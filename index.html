@@ -89,6 +89,26 @@ body {
 	text-align: center;
 	z-index: 1;
 }
+
+#fullscreen-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 100;
+
+    padding: 10px 20px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#fullscreen-btn:hover {
+    background: #555;
+}
 		</style>
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
@@ -98,6 +118,8 @@ body {
 		<canvas id="canvas">
 			Your browser does not support the canvas tag.
 		</canvas>
+
+		<button id="fullscreen-btn">Fullscreen</button>
 
 		<noscript>
 			Your browser does not support JavaScript.
@@ -215,6 +237,25 @@ const engine = new Engine(GODOT_CONFIG);
 	}
 }());
 		</script>
+		<script>
+    const fullscreenButton = document.getElementById("fullscreen-btn");
+
+    fullscreenButton.addEventListener("click", () => {
+        const canvas = document.querySelector("canvas");
+
+        if (!document.fullscreenElement) {
+            canvas.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    });
+
+    document.addEventListener("fullscreenchange", () => {
+        fullscreenButton.textContent = document.fullscreenElement
+            ? "Exit Fullscreen"
+            : "Fullscreen";
+    });
+</script>
 	</body>
 </html>
 
