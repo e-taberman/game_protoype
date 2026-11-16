@@ -255,6 +255,16 @@ const engine = new Engine(GODOT_CONFIG);
             ? "Exit Fullscreen"
             : "Fullscreen";
     });
+
+	document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        if (!document.fullscreenElement) {
+            document.querySelector("canvas").requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+});
 </script>
 	</body>
 </html>
